@@ -1,3 +1,4 @@
+
 export interface Product {
   category: string;
   description: string;
@@ -14,9 +15,9 @@ export enum InventoryActionTypes {
 export interface InventoryState {
   loading: boolean;
   data: Product[];
-  errors?: string;
+  errors?: any;
 }
 
 export interface ApplicationState {
-  inventory: InventoryState;
+  inventory: InventoryState; // hydrated in by server's version of redux store @ initial page load
 }

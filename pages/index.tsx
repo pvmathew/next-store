@@ -1,54 +1,35 @@
+import styled from "styled-components";
 import { NextPage } from "next";
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { fetchRequest } from "../redux/actions";
-import { ApplicationState, Product } from "../redux/types";
-import { ThunkDispatch } from "redux-thunk";
+import CardList from "../components/CardList";
+import { wrapper } from "../redux/store";
+import { fetchData } from "../redux/actions";
+import { ThunkDispatch } from "redux-thunk"
 import { AnyAction } from "redux";
+import { ApplicationState } from "../redux/types";
 
-interface PropsFromState {
-  loading: boolean;
-  data: Product[];
-  errors?: string;
-}
+ 
+export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
+  console.log("2. Page.getStaticProps uses the store to dispatch things");
+  const dispatch: ThunkDispatch<ApplicationState, any, AnyAction> = store.dispatch;
+  await dispatch(fetchData());
+});
 
-interface PropsFromDispatch {
-  fetchRequest: () => any;
-}
-
-type Props = PropsFromDispatch & PropsFromState;
-
-const Home: NextPage<Props> = (props) => {
-  useEffect(() => {
-    props.fetchRequest();
-  }, []);
-
-  useEffect(() => {
-    console.log(props);
-  }, [props]);
+const Home: NextPage = () => {
   return (
-    <div>
-      {props.loading ? "Now loading" : "Not loading"}
-      <p>Number of items: {props.data.length}</p>
-      {props.data.map((product) => (
-        <p>{product.title}</p>
-      ))}
-    </div>
+    <>
+      <Logo src="https://d1vv73x37cbx43.cloudfront.net/skin/frontend/enterprise/newrhdtheme/css/logocss/CurrentSVGLogo/rhd_logo.svg" />
+      <CardList />
+    </>
   );
 };
 
-const mapStateToProps = ({ inventory }: ApplicationState) => ({
-  loading: inventory.loading,
-  errors: inventory.errors,
-  data: inventory.data,
-});
+export default Home;
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
-  return {
-    fetchRequest: () => {
-      dispatch(fetchRequest());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+const Logo = styled.img`
+  width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  top: 50px;
+  margin-top: 20px;
+`;

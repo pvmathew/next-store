@@ -7,7 +7,8 @@ export type AppThunk = ActionCreator<
   ThunkAction<void, ApplicationState, null, Action<string>>
 >;
 
-export const fetchRequest: AppThunk = () => {
+
+export const fetchData: AppThunk = () => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch({ type: InventoryActionTypes.FETCH_REQUEST });

@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 import wrapper from "../redux/store";
 import type { AppProps } from "next/app";
 
-const App = ({ Component, pageProps }: AppProps) => {
+const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <>
       <GlobalStyle />
@@ -21,4 +21,5 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
   }
+
 `;
