@@ -1,18 +1,21 @@
 import { Product } from "../redux/types";
 import styled from "styled-components";
 import Image from "./Image";
+import Link from "next/link";
 
-const Card: React.FC<Product> = ({ title, image, price, category }) => {
+const Card: React.FC<Product> = ({ title, image, price, category, id }) => {
   return (
-    <Container>
-      {category.split(" ").map((category, index) => {
-        if (index === 0) return <Category>{category}</Category>;
-        return <SecondCategory>{category}</SecondCategory>;
-      })}
-      <Image src={image} alt={title} height={150} width={150} />
-      <Title>{title.length > 62 ? title.slice(0, 62) + "..." : title}</Title>
-      <Price>${price.toFixed(2)}</Price>
-    </Container>
+    <Link href={{ pathname: "/product", query: { id } }}>
+      <Container>
+        {category.split(" ").map((category, index) => {
+          if (index === 0) return <Category>{category}</Category>;
+          return <SecondCategory>{category}</SecondCategory>;
+        })}
+        <Image src={image} alt={title} height={150} width={150} />
+        <Title>{title.length > 62 ? title.slice(0, 62) + "..." : title}</Title>
+        <Price>${price.toFixed(2)}</Price>
+      </Container>
+    </Link>
   );
 };
 
@@ -30,7 +33,7 @@ const Container = styled.li`
   cursor: pointer;
   /* transition: 0.2s ease transform; */
 
-  &:hover{
+  &:hover {
   }
 `;
 

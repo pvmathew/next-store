@@ -19,6 +19,7 @@ interface PropsFromDispatch {
 
 type Props = PropsFromDispatch & PropsFromState;
 
+
 const CardList: React.FC<Props> = (props) => {
   return (
       <List>
