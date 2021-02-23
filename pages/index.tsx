@@ -28,8 +28,5 @@ export default Home;
 const Logo = styled.img`
   width: 300px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  top: 50px;
-  margin-top: 20px;
+  margin: 50px auto;
 `;

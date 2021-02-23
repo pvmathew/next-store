@@ -3,8 +3,9 @@ import { ApplicationState } from "../redux/types";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import { Product } from "../redux/types";
+import styled from "styled-components";
 
-import Card from "./card";
+import Card from "./Card";
 
 interface PropsFromState {
   loading: boolean;
@@ -20,14 +21,11 @@ type Props = PropsFromDispatch & PropsFromState;
 
 const CardList: React.FC<Props> = (props) => {
   return (
-    <>
-      <p>Number of items: {props.data.length}</p>
-      <ul>
+      <List>
         {props.data.map((product) => (
           <Card {...product} key={product.id} />
         ))}
-      </ul>
-    </>
+      </List>
   );
 };
 
@@ -46,3 +44,12 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardList);
+
+const List = styled.ul`
+  padding: 0 200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 240px);
+  grid-gap: 40px;
+  justify-content: center;
+  align-content: flex-start;
+`;
