@@ -7,16 +7,20 @@ import {
 } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk, { ThunkMiddleware } from "redux-thunk";
-import { InventoryReducer } from "./reducer";
+import { InventoryReducer, ListingReducer } from "./reducer";
 import { ApplicationState as State } from "./types";
 
 // consolodate all reducers into one
-const rootReducer = combineReducers({ inventory: InventoryReducer });
+const rootReducer = combineReducers({
+  inventory: InventoryReducer,
+  listing: ListingReducer,
+});
 
 // create a makeStore function for every request
 const makeStore: MakeStore<State> = (context: Context) =>
   createStore(
     rootReducer,
+    {},
     composeWithDevTools(
       applyMiddleware(thunk as ThunkMiddleware<State, AnyAction>)
     )

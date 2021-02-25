@@ -1,25 +1,25 @@
 import React from "react";
-import { createGlobalStyle } from "styled-components";
 import wrapper from "../redux/store";
-import type { AppProps } from "next/app";
+import App, { AppInitialProps, AppContext } from "next/app";
 
-const App: React.FC<AppProps> = ({ Component, pageProps }) => {
-  return (
-    <>
-      <GlobalStyle />
-      <Component {...pageProps} />
-    </>
-  );
-};
 
-export default wrapper.withRedux(App);
+class WrappedApp extends App<AppInitialProps> {
+  public static getInitialProps = async ({ Component, ctx }: AppContext) => {
+    ctx.store.dispatch({ type: "APP", payload: "was set in _app" });
+    return {
+      pageProps: {
+        ...(Component.getInitialProps
+          ? await Component.getInitialProps(ctx)
+          : {}),
+      },
+    };
+  };
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
+  public render() {
+    const { Component, pageProps } = this.props;
+    return <Component {...pageProps} />;
   }
+}
 
-`;
+export default wrapper.withRedux(WrappedApp);
+

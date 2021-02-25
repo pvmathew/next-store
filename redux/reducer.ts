@@ -1,15 +1,17 @@
 import { Reducer } from "redux";
 import { HYDRATE } from "next-redux-wrapper";
-import { InventoryActionTypes, InventoryState } from "./types";
+import {
+  InventoryActionTypes,
+  ListingActionTypes,
+  InventoryState,
+  ListingState,
+} from "./types";
 
-export const initialState: InventoryState = {
-  data: [],
-  errors: null,
-  loading: false,
-};
 
-const reducer: Reducer<InventoryState> = (state = initialState, action) => {
-  console.log(action.type);
+export const InventoryReducer: Reducer<InventoryState> = (
+  state = { data: [], errors: null, loading: false },
+  action
+) => {
   switch (action.type) {
     case HYDRATE:
       return { ...state, ...action.payload.inventory };
@@ -27,5 +29,24 @@ const reducer: Reducer<InventoryState> = (state = initialState, action) => {
     }
   }
 };
-
-export { reducer as InventoryReducer };
+export const ListingReducer: Reducer<ListingState> = (
+  state = { data: null, errors: null, loading: false },
+  action
+) => {
+  switch (action.type) {
+    case HYDRATE:
+      return { ...state, ...action.payload.listing };
+    case ListingActionTypes.FETCH_REQUEST: {
+      return { ...state, loading: true };
+    }
+    case ListingActionTypes.FETCH_SUCCESS: {
+      return { ...state, loading: false, data: action.payload };
+    }
+    case ListingActionTypes.FETCH_ERROR: {
+      return { ...state, loading: false, errors: action.payload };
+    }
+    default: {
+      return state;
+    }
+  }
+};
