@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@badrap/bar-of-progress": "^0.1.2",
     "next": "10.0.7",
     "next-redux-wrapper": "^6.0.2",
     "react": "17.0.1",
