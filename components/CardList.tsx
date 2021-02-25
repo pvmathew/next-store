@@ -1,50 +1,24 @@
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { ApplicationState } from "../redux/types";
-import { ThunkDispatch } from "redux-thunk";
-import { AnyAction } from "redux";
 import { Product } from "../redux/types";
 import styled from "styled-components";
 
 import Card from "./Card";
 
-interface PropsFromState {
-  loading: boolean;
-  data: Product[];
-  errors?: string;
-}
-
-interface PropsFromDispatch {
-  // someAction: () => any;
-}
-
-type Props = PropsFromDispatch & PropsFromState;
-
-
-const CardList: React.FC<Props> = (props) => {
+const CardList: React.FC = () => {
+  const inventory = useSelector(
+    (state: ApplicationState) => state.inventory.data
+  );
   return (
-      <List>
-        {props.data.map((product) => (
-          <Card {...product} key={product.id} />
-        ))}
-      </List>
+    <List>
+      {inventory.map((product) => (
+        <Card {...product} key={product.id} />
+      ))}
+    </List>
   );
 };
 
-const mapStateToProps = ({ inventory }: ApplicationState) => ({
-  loading: inventory.loading,
-  errors: inventory.errors,
-  data: inventory.data,
-});
-
-const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
-  return {
-    // someAction: () => {
-    //   dispatch(action();
-    // },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardList);
+export default CardList;
 
 const List = styled.ul`
   padding: 0 200px;
