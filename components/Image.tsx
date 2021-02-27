@@ -8,19 +8,13 @@ interface Props {
   width: number;
 }
 
-const LazyImage: React.FC<Props> = ({ src, alt, height, width }) => (
+const NextImage: React.FC<Props> = ({ src, alt, height, width }) => (
   <Container height={height} width={width}>
-    <Image
-      src={src}
-      alt={alt}
-      layout="fill"
-      objectFit="contain"
-      loading="lazy"
-    />
+    <Image src={src} alt={alt} layout="fill" objectFit="contain" />
   </Container>
 );
 
-export default LazyImage;
+export default NextImage;
 
 interface ContainerStyled {
   height: number;
