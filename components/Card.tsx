@@ -1,9 +1,25 @@
-import { Product } from "../redux/types";
+import { useSelector } from "react-redux";
+import { Product, CurrencyTypes, ApplicationState } from "../redux/types";
 import styled from "styled-components";
 import Image from "./Image";
 import Link from "next/link";
 
 const Card: React.FC<Product> = ({ title, image, price, category, id }) => {
+  const currency = useSelector((state: ApplicationState) => state.currency);
+
+  const generatePriceString = () => {
+    switch (currency.selected) {
+      case CurrencyTypes.JPY:
+        return `￥${(price * currency.jpy_rate).toFixed(0)}`;
+      case CurrencyTypes.GBP:
+        return `£${(price * currency.gbp_rate).toFixed(2)}`;
+      case CurrencyTypes.EUR:
+        return `€${(price * currency.eur_rate).toFixed(2)}`;
+      default:
+        return `$${price.toFixed(2)}`;
+    }
+  };
+
   return (
     <Link href={{ pathname: "/product", query: { id } }}>
       <Container>
@@ -13,7 +29,7 @@ const Card: React.FC<Product> = ({ title, image, price, category, id }) => {
         })}
         <Image src={image} alt={title} height={150} width={150} />
         <Title>{title.length > 62 ? title.slice(0, 62) + "..." : title}</Title>
-        <Price>${price.toFixed(2)}</Price>
+        <Price>{generatePriceString()}</Price>
       </Container>
     </Link>
   );
@@ -31,7 +47,6 @@ const Container = styled.li`
   box-sizing: border-box;
   background-color: white;
   cursor: pointer;
-  /* transition: 0.2s ease transform; */
 
   &:hover {
   }

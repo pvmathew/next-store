@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { ApplicationState } from "../redux/types";
-import { Product } from "../redux/types";
 import styled from "styled-components";
 
 import Card from "./Card";
@@ -9,6 +8,7 @@ const CardList: React.FC = () => {
   const inventory = useSelector(
     (state: ApplicationState) => state.inventory.data
   );
+
   return (
     <List>
       {inventory.map((product) => (

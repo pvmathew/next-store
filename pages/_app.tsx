@@ -19,7 +19,6 @@ Router.events.on("routeChangeComplete", progress.finish);
 Router.events.on("routeChangeError", progress.finish);
 
 class WrappedApp extends App<AppInitialProps> {
-
   public render() {
     const { Component, pageProps } = this.props;
     return (

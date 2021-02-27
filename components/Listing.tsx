@@ -2,16 +2,32 @@ import styled from "styled-components";
 import Image from "../components/Image";
 import { useSelector } from "react-redux";
 import Link from "next/link";
-import { ApplicationState, Product } from "../redux/types";
+import { ApplicationState, Product, CurrencyTypes } from "../redux/types";
 
 const Listing: React.FC = () => {
-  // product is null on first render; likely due to first store hydration that happens after Page.getInitialProps
-  // store will have listing data after second hydration (after getServerProps)
-  const product: Product = useSelector(
+  // product is null on first render
+  // store will have listing data after second hydration cycle
+  const product: Product | null = useSelector(
     (state: ApplicationState) => state.listing.data
   );
 
+  const currency = useSelector((state: ApplicationState) => state.currency);
+
   if (product) {
+    const { title, image, price, category, description } = product;
+
+    const generatePriceString = () => {
+      switch (currency.selected) {
+        case CurrencyTypes.JPY:
+          return `￥${(price * currency.jpy_rate).toFixed(0)}`;
+        case CurrencyTypes.GBP:
+          return `£${(price * currency.gbp_rate).toFixed(2)}`;
+        case CurrencyTypes.EUR:
+          return `€${(price * currency.eur_rate).toFixed(2)}`;
+        default:
+          return `$${price.toFixed(2)}`;
+      }
+    };
     return (
       <Container>
         <Link href="/">
@@ -21,20 +37,20 @@ const Listing: React.FC = () => {
         </Link>
         <ImageArea>
           <Image
-            src={product.image}
-            alt={product.title}
+            src={image}
+            alt={title}
             height={500}
             width={500}
           />
         </ImageArea>
         <TextArea>
-          {product.category.split(" ").map((category, index) => {
+          {category.split(" ").map((category, index) => {
             if (index === 0) return <Category>{category}</Category>;
             return <SecondCategory>{category}</SecondCategory>;
           })}
-          <Title>{product.title}</Title>
-          <Description>{product.description}</Description>
-          <Price>${product.price.toFixed(2)}</Price>
+          <Title>{title}</Title>
+          <Description>{description}</Description>
+          <Price>{generatePriceString()}</Price>
           <AddToCartButton>Add To Cart</AddToCartButton>
         </TextArea>
       </Container>
