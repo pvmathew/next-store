@@ -19,11 +19,11 @@ const Listing: React.FC = () => {
     const generatePriceString = () => {
       switch (currency.selected) {
         case CurrencyTypes.JPY:
-          return `￥${(price * currency.jpy_rate).toFixed(0)}`;
+          return `￥${(price * currency.rates.jpy).toFixed(0)}`;
         case CurrencyTypes.GBP:
-          return `£${(price * currency.gbp_rate).toFixed(2)}`;
+          return `£${(price * currency.rates.gbp).toFixed(2)}`;
         case CurrencyTypes.EUR:
-          return `€${(price * currency.eur_rate).toFixed(2)}`;
+          return `€${(price * currency.rates.eur).toFixed(2)}`;
         default:
           return `$${price.toFixed(2)}`;
       }
@@ -36,12 +36,7 @@ const Listing: React.FC = () => {
           </BackButton>
         </Link>
         <ImageArea>
-          <Image
-            src={image}
-            alt={title}
-            height={500}
-            width={500}
-          />
+          <Image src={image} alt={title} height={500} width={500} />
         </ImageArea>
         <TextArea>
           {category.split(" ").map((category, index) => {

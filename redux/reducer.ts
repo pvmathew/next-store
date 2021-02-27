@@ -58,33 +58,42 @@ export const ListingReducer: Reducer<ListingState> = (
 
 export const CurrencyReducer: Reducer<CurrencyState> = (
   state = {
-    eur_rate: 0,
-    jpy_rate: 0,
-    gbp_rate: 0,
+    rates: { init: false, eur: 0, jpy: 0, gbp: 0 },
     selected: CurrencyTypes.USD,
-    init: false,
   },
   action
 ) => {
   switch (action.type) {
     case HYDRATE:
       const payload = removeInitialValues(action.payload);
-      return { ...state, ...payload.currency };
+      const rates = payload.currency.rates; // latest rates grabbed in server-side store
+
+      return {
+        ...state,
+        rates: {
+          ...rates,
+        },
+      };
+
     case CurrencyActionTypes.FETCH_REQUEST: {
-      return { ...state, init: true };
+      return { ...state, rates: { ...state.rates, init: true } };
     }
     case CurrencyActionTypes.FETCH_SUCCESS: {
       return {
         ...state,
-        eur_rate: action.payload.rates["EUR"],
-        jpy_rate: action.payload.rates["JPY"],
-        gbp_rate: action.payload.rates["GBP"],
-        init: true,
+        rates: {
+          ...state.rates,
+          eur: action.payload.rates["EUR"],
+          jpy: action.payload.rates["JPY"],
+          gbp: action.payload.rates["GBP"],
+        },
       };
     }
     case CurrencyActionTypes.FETCH_ERROR: {
-      return { ...state, errors: action.payload };
+      // return { ...state, rates: { ...state.rates, error: action.payload } };
     }
+
+    //client only
     case CurrencyActionTypes.SELECT_CURRENCY: {
       return { ...state, selected: action.payload };
     }
@@ -102,8 +111,12 @@ const removeInitialValues = (payload) => {
   if (payload.listing && payload.listing.init === false) {
     delete payload.listing;
   }
-  if (payload.currency && payload.currency.init === false) {
-    delete payload.currency;
+  if (
+    payload.currency &&
+    payload.currency.rates &&
+    payload.currency.rates.init === false
+  ) {
+    delete payload.currency.rates;
   }
   return payload;
 };

@@ -3,7 +3,6 @@ import {
   InventoryActionTypes,
   ListingActionTypes,
   CurrencyActionTypes,
-  CurrencyOptions,
 } from "./types";
 import { ActionCreator, Action, Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";

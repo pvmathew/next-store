@@ -43,12 +43,16 @@ export interface ListingState {
   errors?: any;
 }
 
-export interface CurrencyState {
-  eur_rate: number;
-  jpy_rate: number;
-  gbp_rate: number;
-  selected: CurrencyTypes;
+type Rates = {
+  jpy: number;
+  eur: number;
+  gbp: number;
   init: boolean;
+};
+
+export interface CurrencyState {
+  rates: Rates;
+  selected: CurrencyTypes;
   errors?: any;
 }
 

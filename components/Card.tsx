@@ -10,11 +10,11 @@ const Card: React.FC<Product> = ({ title, image, price, category, id }) => {
   const generatePriceString = () => {
     switch (currency.selected) {
       case CurrencyTypes.JPY:
-        return `￥${(price * currency.jpy_rate).toFixed(0)}`;
+        return `￥${(price * currency.rates.jpy).toFixed(0)}`;
       case CurrencyTypes.GBP:
-        return `£${(price * currency.gbp_rate).toFixed(2)}`;
+        return `£${(price * currency.rates.gbp).toFixed(2)}`;
       case CurrencyTypes.EUR:
-        return `€${(price * currency.eur_rate).toFixed(2)}`;
+        return `€${(price * currency.rates.eur).toFixed(2)}`;
       default:
         return `$${price.toFixed(2)}`;
     }

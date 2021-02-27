@@ -17,6 +17,7 @@ const Home: NextPage = () => {
       <Logo />
       <CardList />
       <Footer />
+      
     </>
   );
 };

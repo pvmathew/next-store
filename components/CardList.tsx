@@ -10,11 +10,16 @@ const CardList: React.FC = () => {
   );
 
   return (
-    <List>
-      {inventory.map((product) => (
-        <Card {...product} key={product.id} />
-      ))}
-    </List>
+    <>
+      <List>
+        {inventory.map((product) => (
+          <Card {...product} key={product.id} />
+        ))}
+      </List>
+      <NumItemsText>
+        Now showing items 1-{inventory.length} of {inventory.length}
+      </NumItemsText>
+    </>
   );
 };
 
@@ -27,4 +32,11 @@ const List = styled.ul`
   grid-gap: 40px;
   justify-content: center;
   align-content: flex-start;
+`;
+
+const NumItemsText = styled.p`
+  text-align: center;
+  color: #505050;
+  font-size: 0.8rem;
+  margin: 30px 0;
 `;

@@ -4,7 +4,10 @@ import { NextPage } from "next";
 import { ApplicationState } from "../redux/types";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import { fetchExchangeRate, fetchInventory, fetchListing } from "../redux/actions";
+import {
+  fetchExchangeRate,
+  fetchListing,
+} from "../redux/actions";
 
 import Listing from "../components/Listing";
 import CurrencySelect from "../components/CurrencySelect";
