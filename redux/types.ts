@@ -18,13 +18,13 @@ export enum ListingActionTypes {
   FETCH_ERROR = "@@listing/FETCH_ERROR",
 }
 export interface InventoryState {
-  loading: boolean;
+  init: boolean;
   data: Product[];
   errors?: any;
 }
 export interface ListingState {
-  loading: boolean;
-  data: Product | null;
+  init: boolean;
+  data: Product;
   errors?: any;
 }
 

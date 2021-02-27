@@ -7,22 +7,28 @@ import {
   ListingState,
 } from "./types";
 
-
 export const InventoryReducer: Reducer<InventoryState> = (
-  state = { data: [], errors: null, loading: false },
+  state = { data: [], errors: null, init: false },
   action
 ) => {
   switch (action.type) {
     case HYDRATE:
+      // drop initial values from first HYDRATE
+      if (action.payload.inventory && action.payload.inventory.init === false) {
+        delete action.payload.inventory;
+      }
+      if (action.payload.listing && action.payload.listing.init === false) {
+        delete action.payload.listing;
+      }
       return { ...state, ...action.payload.inventory };
     case InventoryActionTypes.FETCH_REQUEST: {
-      return { ...state, loading: true };
+      return { ...state, init: true };
     }
     case InventoryActionTypes.FETCH_SUCCESS: {
-      return { ...state, loading: false, data: action.payload };
+      return { ...state, data: action.payload };
     }
     case InventoryActionTypes.FETCH_ERROR: {
-      return { ...state, loading: false, errors: action.payload };
+      return { ...state, errors: action.payload };
     }
     default: {
       return state;
@@ -30,20 +36,26 @@ export const InventoryReducer: Reducer<InventoryState> = (
   }
 };
 export const ListingReducer: Reducer<ListingState> = (
-  state = { data: null, errors: null, loading: false },
+  state = { data: null, errors: null, init: false },
   action
 ) => {
   switch (action.type) {
     case HYDRATE:
+      if (action.payload.inventory && action.payload.inventory.init === false) {
+        delete action.payload.inventory;
+      }
+      if (action.payload.listing && action.payload.listing.init === false) {
+        delete action.payload.listing;
+      }
       return { ...state, ...action.payload.listing };
     case ListingActionTypes.FETCH_REQUEST: {
-      return { ...state, loading: true };
+      return { ...state, init: true };
     }
     case ListingActionTypes.FETCH_SUCCESS: {
-      return { ...state, loading: false, data: action.payload };
+      return { ...state, data: action.payload };
     }
     case ListingActionTypes.FETCH_ERROR: {
-      return { ...state, loading: false, errors: action.payload };
+      return { ...state, errors: action.payload };
     }
     default: {
       return state;

@@ -1,42 +1,55 @@
 import styled from "styled-components";
 import Image from "../components/Image";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { ApplicationState, Product } from "../redux/types";
 
 const Listing: React.FC = () => {
-  const product = useSelector((state: ApplicationState) => state.listing.data);
-
-  const { category, description, image, price, title } = product;
-  return (
-    <Container>
-      <Link href="/">
-        <BackButton>Go Back</BackButton>
-      </Link>
-      <ImageArea>
-        <Image src={product.image} alt={product.title} height={500} width={500} />
-      </ImageArea>
-      <TextArea>
-        {category.split(" ").map((category, index) => {
-          if (index === 0) return <Category>{category}</Category>;
-          return <SecondCategory>{category}</SecondCategory>;
-        })}
-        <Title>{title}</Title>
-        <Description>{description}</Description>
-        <Price>${price.toFixed(2)}</Price>
-        <AddToCartButton>Add To Cart</AddToCartButton>
-      </TextArea> 
-    </Container>
+  // product is null on first render; likely due to first store hydration that happens after Page.getInitialProps
+  // store will have listing data after second hydration (after getServerProps)
+  const product: Product = useSelector(
+    (state: ApplicationState) => state.listing.data
   );
+
+  if (product) {
+    return (
+      <Container>
+        <Link href="/">
+          <BackButton>
+            <LeftArrow /> Back
+          </BackButton>
+        </Link>
+        <ImageArea>
+          <Image
+            src={product.image}
+            alt={product.title}
+            height={500}
+            width={500}
+          />
+        </ImageArea>
+        <TextArea>
+          {product.category.split(" ").map((category, index) => {
+            if (index === 0) return <Category>{category}</Category>;
+            return <SecondCategory>{category}</SecondCategory>;
+          })}
+          <Title>{product.title}</Title>
+          <Description>{product.description}</Description>
+          <Price>${product.price.toFixed(2)}</Price>
+          <AddToCartButton>Add To Cart</AddToCartButton>
+        </TextArea>
+      </Container>
+    );
+  }
+
+  return <Container></Container>;
 };
 
 export default Listing;
 
 const Container = styled.div`
   position: relative;
-  height: 80vh;
-  margin: 0 100px;
+  min-height: 80vh;
+  margin: 0 100px 20px 100px;
   list-style-type: none;
   box-shadow: 0px 0px 5px #bbbbbb;
   padding: 80px;
@@ -53,12 +66,22 @@ const BackButton = styled.a`
   height: 40px;
   border-radius: 5px;
   background-color: white;
-  border: 1px solid black;
+  color: #505050;
   cursor: pointer;
   text-align: center;
   line-height: 40px;
-  top: 50px;
-  left: 50px;
+  top: 25px;
+  left: 25px;
+`;
+
+const LeftArrow = styled.i`
+  border: solid #505050;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  margin-bottom: 1px;
 `;
 
 const ImageArea = styled.div`
@@ -105,6 +128,7 @@ const SecondCategory = styled.p`
   background-color: lightgray;
   font-size: 0.8rem;
   padding-left: 18px;
+  padding-right: 2px;
   position: relative;
   width: auto;
   height: 25px;
@@ -152,7 +176,7 @@ const Price = styled.h2`
 
 const AddToCartButton = styled.button`
   width: 120px;
-  height: 50px;
+  height: 48px;
   border-radius: 5px;
   background-color: white;
   border: 1px solid black;
@@ -160,4 +184,8 @@ const AddToCartButton = styled.button`
   display: block;
   margin-left: auto;
   margin-right: 0;
+  font-size: 1em;
+  &:focus {
+    outline: 0;
+  }
 `;
