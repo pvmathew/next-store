@@ -11,7 +11,7 @@ import {
 } from "./types";
 
 export const InventoryReducer: Reducer<InventoryState> = (
-  state = { data: [], errors: null, init: false },
+  state: InventoryState = { data: [], errors: null, init: false },
   action
 ) => {
   switch (action.type) {
@@ -34,7 +34,7 @@ export const InventoryReducer: Reducer<InventoryState> = (
 };
 
 export const ListingReducer: Reducer<ListingState> = (
-  state = { data: null, errors: null, init: false },
+  state: ListingState = { data: null, errors: null, init: false },
   action
 ) => {
   switch (action.type) {
@@ -57,7 +57,7 @@ export const ListingReducer: Reducer<ListingState> = (
 };
 
 export const CurrencyReducer: Reducer<CurrencyState> = (
-  state = {
+  state: CurrencyState = {
     rates: { init: false, eur: 0, jpy: 0, gbp: 0 },
     selected: CurrencyTypes.USD,
   },
@@ -90,7 +90,7 @@ export const CurrencyReducer: Reducer<CurrencyState> = (
       };
     }
     case CurrencyActionTypes.FETCH_ERROR: {
-      // return { ...state, rates: { ...state.rates, error: action.payload } };
+      return { ...state, rates: { ...state.rates, error: action.payload } };
     }
 
     //client only
