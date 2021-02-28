@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import Link from "next/link";
 
-const LogoComponent: React.FC = () => (
+import CurrencySelect from "./CurrencySelect";
+
+const Header: React.FC = () => (
   <Container>
+    <CurrencySelect />
     <Link href="/">
       <Logo src="https://d1vv73x37cbx43.cloudfront.net/skin/frontend/enterprise/newrhdtheme/css/logocss/CurrentSVGLogo/rhd_logo.svg" />
     </Link>
@@ -10,11 +13,10 @@ const LogoComponent: React.FC = () => (
 );
 
 const Container = styled.div`
-/* background-color: black; */
-margin: 0 50px;
-border-bottom: solid 1px #eee;
-margin-bottom: 20px;
-`
+  margin: 20px 50px;
+  padding: 60px auto 60px auto;
+  border-bottom: solid 1px #eee;
+`;
 
 const Logo = styled.img`
   width: 300px;
@@ -23,4 +25,4 @@ const Logo = styled.img`
   cursor: pointer;
 `;
 
-export default LogoComponent;
+export default Header;

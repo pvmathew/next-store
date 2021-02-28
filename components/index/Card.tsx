@@ -1,8 +1,9 @@
-import { useSelector } from "react-redux";
-import { Product, CurrencyTypes, ApplicationState } from "../redux/types";
 import styled from "styled-components";
-import Image from "./Image";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { Product, CurrencyTypes, ApplicationState } from "../../redux/types";
+
+import Image from "../common/Image";
 
 const Card: React.FC<Product> = ({ title, image, price, category, id }) => {
   const currency = useSelector((state: ApplicationState) => state.currency);

@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import Image from "../components/Image";
-import { useSelector } from "react-redux";
 import Link from "next/link";
-import { ApplicationState, Product, CurrencyTypes } from "../redux/types";
+import { useSelector } from "react-redux";
+import { ApplicationState, Product, CurrencyTypes } from "../../redux/types";
+
+import Image from "../common/Image";
 
 const Listing: React.FC = () => {
   // product is null on first render

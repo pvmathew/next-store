@@ -1,23 +1,18 @@
 import React from "react";
-import Logo from "../components/Logo";
 import { NextPage } from "next";
 import { ApplicationState } from "../redux/types";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import {
-  fetchExchangeRate,
-  fetchListing,
-} from "../redux/actions";
-
-import Listing from "../components/Listing";
-import CurrencySelect from "../components/CurrencySelect";
+import { fetchExchangeRate, fetchListing } from "../redux/actions";
 import { wrapper } from "../redux/store";
+
+import Header from "../components/common/Header";
+import Listing from "../components/product/Listing";
 
 const Product: NextPage = () => {
   return (
     <>
-      <CurrencySelect />
-      <Logo />
+      <Header />
       <Listing />
     </>
   );

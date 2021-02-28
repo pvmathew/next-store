@@ -1,12 +1,11 @@
 import styled from "styled-components";
-
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ApplicationState,
   CurrencyActionTypes,
   CurrencyTypes,
-} from "../redux/types";
+} from "../../redux/types";
 
 const CurrencySelect: React.FC = () => {
   const [dropdownVisibility, showDropdown] = useState(false);
@@ -39,11 +38,7 @@ const CurrencySelect: React.FC = () => {
       <DropdownButton onClick={() => showDropdown((state) => !state)}>
         {selectedCurrency} <DownArrow />
       </DropdownButton>
-      {dropdownVisibility && (
-        <DropdownList>
-          {DropdownListItems}
-        </DropdownList>
-      )}
+      {dropdownVisibility && <DropdownList>{DropdownListItems}</DropdownList>}
     </Container>
   );
 };
@@ -52,7 +47,7 @@ export default CurrencySelect;
 
 const Container = styled.div`
   position: absolute;
-  top:10px;
+  top: 10px;
   right: 10px;
 `;
 
