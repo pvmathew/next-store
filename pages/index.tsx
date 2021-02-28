@@ -81,7 +81,7 @@ const NewArrivalsFlairBlock = styled.div`
 
   @media only screen and (min-width: 768px) {
     height: 50px;
-    width: 100px;
+    width: 50px;
     background-color: #111111;
     margin-left: 10px;
     display: block;

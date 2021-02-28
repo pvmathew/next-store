@@ -27,7 +27,7 @@ const Card: React.FC<Product> = ({ title, image, price, category, id }) => {
           if (index === 0) return <Category>{category}</Category>;
           return <SecondCategory>{category}</SecondCategory>;
         })}
-        <Image src={image} alt={title} height={180} width={150} />
+        <Image src={image} alt={title} height={180} />
         <Title>{title.length > 60 ? title.slice(0, 60) + "..." : title}</Title>
         <Price>{generatePriceString()}</Price>
       </Container>

@@ -21,11 +21,10 @@ interface ContainerStyled {
 
 const Container = styled.div<ContainerStyled>`
   position: relative;
-  height: 300px;
+  height: ${(props) => `${props.height}px;`};
   width: 100%;
   margin: 0 auto;
 
   @media only screen and (min-width: 768px) {
-    height: ${(props) => `${props.height}px;`};
   }
 `;
