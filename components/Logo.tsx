@@ -10,8 +10,7 @@ const LogoComponent: React.FC = () => (
 const Logo = styled.img`
   width: 300px;
   display: block;
-  top: 50px;
-  margin: 50px auto;
+  margin: 80px auto 60px auto;
   cursor: pointer;
 `;
 

@@ -52,8 +52,8 @@ export default CurrencySelect;
 
 const Container = styled.div`
   position: absolute;
-  right: 20px;
-  top: 20px;
+  top:10px;
+  right: 10px;
 `;
 
 const DropdownButton = styled.div`

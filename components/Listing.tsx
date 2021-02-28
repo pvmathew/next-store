@@ -36,7 +36,7 @@ const Listing: React.FC = () => {
           </BackButton>
         </Link>
         <ImageArea>
-          <Image src={image} alt={title} height={500} width={500} />
+          <Image src={image} alt={title} height={500} />
         </ImageArea>
         <TextArea>
           {category.split(" ").map((category, index) => {
@@ -58,15 +58,21 @@ const Listing: React.FC = () => {
 export default Listing;
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   position: relative;
-  min-height: 80vh;
-  margin: 0 100px 20px 100px;
+  min-height: 70vh;
+  margin: 20px;
   list-style-type: none;
   box-shadow: 0px 0px 5px #bbbbbb;
-  padding: 80px;
+  padding: 5px 10px;
   box-sizing: border-box;
   background-color: white;
-  display: flex;
+  cursor: pointer;
+
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const BackButton = styled.a`
@@ -81,8 +87,14 @@ const BackButton = styled.a`
   cursor: pointer;
   text-align: center;
   line-height: 40px;
-  top: 25px;
-  left: 25px;
+  top: 10px;
+  left: 0px;
+  z-index: 2;
+
+  @media only screen and (min-width: 768px) {
+    top: 15px;
+    left: 5px;
+  }
 `;
 
 const LeftArrow = styled.i`
@@ -92,19 +104,34 @@ const LeftArrow = styled.i`
   padding: 3px;
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
-  margin-bottom: 1px;
+  margin-bottom: 2px;
 `;
 
 const ImageArea = styled.div`
-  width: 50%;
-  display: flex;
-  align-items: center;
-  border-right: solid 1px #cecece;
+  width: 100%;
+  border-bottom: solid 1px #cecece;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-top: 30px;
+
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+    border-bottom: none;
+    border-right: solid 1px #cecece;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    padding: 50px;
+  }
 `;
 
 const TextArea = styled.div`
-  width: 50%;
-  padding: 50px;
+  width: 100%;
+  padding: 20px 10px 10px 10px;
+  box-sizing: border-box;
+  @media only screen and (min-width: 768px) {
+    padding: 80px 50px;
+  }
 `;
 
 const Category = styled.p`
@@ -174,6 +201,11 @@ const SecondCategory = styled.p`
 const Title = styled.h1`
   margin: 20px 10px;
   display: block;
+  font-size: 1.5rem;
+
+  @media only screen and (min-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const Description = styled.p`
@@ -189,8 +221,8 @@ const AddToCartButton = styled.button`
   width: 120px;
   height: 48px;
   border-radius: 5px;
-  background-color: white;
-  border: 1px solid black;
+  background-color: #fff;
+  border: 1px solid #505050;
   cursor: pointer;
   display: block;
   margin-left: auto;
@@ -198,5 +230,10 @@ const AddToCartButton = styled.button`
   font-size: 1em;
   &:focus {
     outline: 0;
+  }
+  &:hover {
+    background-color: #111111;
+    border: none;
+    color: white;
   }
 `;

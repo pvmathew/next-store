@@ -27,8 +27,8 @@ const Card: React.FC<Product> = ({ title, image, price, category, id }) => {
           if (index === 0) return <Category>{category}</Category>;
           return <SecondCategory>{category}</SecondCategory>;
         })}
-        <Image src={image} alt={title} height={150} width={150} />
-        <Title>{title.length > 62 ? title.slice(0, 62) + "..." : title}</Title>
+        <Image src={image} alt={title} height={180} width={150} />
+        <Title>{title.length > 60 ? title.slice(0, 60) + "..." : title}</Title>
         <Price>{generatePriceString()}</Price>
       </Container>
     </Link>
@@ -39,8 +39,9 @@ export default Card;
 
 const Container = styled.li`
   position: relative;
-  width: 240px;
+  width: 100%;
   height: 300px;
+  margin: 0 20px 15px 20px;
   list-style-type: none;
   box-shadow: 0px 0px 5px #bbbbbb;
   padding: 5px 10px;
@@ -49,6 +50,12 @@ const Container = styled.li`
   cursor: pointer;
 
   &:hover {
+  }
+
+  @media only screen and (min-width: 768px) {
+    width: 240px;
+    height: 320px;
+    margin: 15px;
   }
 `;
 

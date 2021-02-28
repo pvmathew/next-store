@@ -11,6 +11,8 @@ const CardList: React.FC = () => {
 
   return (
     <>
+
+
       <List>
         {inventory.map((product) => (
           <Card {...product} key={product.id} />
@@ -26,17 +28,19 @@ const CardList: React.FC = () => {
 export default CardList;
 
 const List = styled.ul`
-  padding: 0 200px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 240px);
-  grid-gap: 40px;
+  padding: 0 0;
+  display: flex;
+  flex-flow: wrap;
   justify-content: center;
   align-content: flex-start;
+
+  @media only screen and (min-width: 768px) {
+    padding: 0 100px;
+  }
 `;
 
 const NumItemsText = styled.p`
   text-align: center;
   color: #505050;
   font-size: 0.8rem;
-  margin: 30px 0;
 `;
