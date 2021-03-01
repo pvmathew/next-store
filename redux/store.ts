@@ -7,7 +7,12 @@ import {
 } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk, { ThunkMiddleware } from "redux-thunk";
-import { CurrencyReducer, InventoryReducer, ListingReducer } from "./reducer";
+import {
+  CurrencyReducer,
+  InventoryReducer,
+  LayoutReducer,
+  ListingReducer,
+} from "./reducer";
 import { ApplicationState as State } from "./types";
 
 // consolodate all reducers into one
@@ -15,6 +20,7 @@ const rootReducer = combineReducers({
   inventory: InventoryReducer,
   listing: ListingReducer,
   currency: CurrencyReducer,
+  layout: LayoutReducer,
 });
 
 // create a makeStore function for every request

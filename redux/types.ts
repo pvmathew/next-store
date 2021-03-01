@@ -14,6 +14,18 @@ export enum CurrencyTypes {
   GBP = "GBP",
 }
 
+type Rates = {
+  jpy: number;
+  eur: number;
+  gbp: number;
+  init: boolean;
+};
+
+export enum LayoutTypes {
+  GRID = "GRID",
+  LIST = "LIST",
+}
+
 export enum InventoryActionTypes {
   FETCH_REQUEST = "@@inventory/FETCH_REQUEST",
   FETCH_SUCCESS = "@@inventory/FETCH_SUCCESS",
@@ -32,6 +44,11 @@ export enum CurrencyActionTypes {
   FETCH_ERROR = "@@currency/FETCH_ERROR",
   SELECT_CURRENCY = "@@currency/SELECT_CURRENCY",
 }
+
+export enum LayoutActionTypes {
+  SET_LIST = "@@layout/SET_LIST",
+  SET_GRID = "@@layout/SET_GRID",
+}
 export interface InventoryState {
   init: boolean;
   data: Product[];
@@ -43,21 +60,19 @@ export interface ListingState {
   errors?: any;
 }
 
-type Rates = {
-  jpy: number;
-  eur: number;
-  gbp: number;
-  init: boolean;
-};
-
 export interface CurrencyState {
   rates: Rates;
   selected: CurrencyTypes;
   errors?: any;
 }
 
+export interface LayoutState {
+  style: LayoutTypes;
+}
+
 export interface ApplicationState {
   inventory: InventoryState;
   listing: ListingState;
   currency: CurrencyState;
+  layout: LayoutState;
 }

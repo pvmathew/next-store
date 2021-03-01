@@ -19,8 +19,9 @@ const CurrencySelect: React.FC = () => {
     { flag: "🇯🇵", currency: CurrencyTypes.JPY },
     { flag: "🇪🇺", currency: CurrencyTypes.EUR },
     { flag: "🇬🇧", currency: CurrencyTypes.GBP },
-  ].map((item) => (
+  ].map((item, index) => (
     <DropdownListItem
+      key={index}
       onClick={() => {
         dispatch({
           type: CurrencyActionTypes.SELECT_CURRENCY,
@@ -38,7 +39,10 @@ const CurrencySelect: React.FC = () => {
       <DropdownButton onClick={() => showDropdown((state) => !state)}>
         {selectedCurrency} <DownArrow />
       </DropdownButton>
-      {dropdownVisibility && <DropdownList>{DropdownListItems}</DropdownList>}
+      {/* {dropdownVisibility && <DropdownList>{DropdownListItems}</DropdownList>} */}
+      <DropdownList active={dropdownVisibility}>
+        {DropdownListItems}
+      </DropdownList>
     </Container>
   );
 };
@@ -77,13 +81,18 @@ const DownArrow = styled.i`
 `;
 
 const DropdownList = styled.div`
-  transition: max-height 0.6s ease-out;
+  transition: max-height 0.5s ease;
   max-height: 0;
   overflow: hidden;
   margin: 0;
   padding: 0;
-  max-height: 1000px;
-  opacity: 1;
+
+  ${({ active }: any) =>
+    active &&
+    `
+      max-height: 200px;
+      opacity: 1;
+    `}
 `;
 
 const DropdownListItem = styled.div`

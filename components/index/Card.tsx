@@ -1,12 +1,20 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import { Product, CurrencyTypes, ApplicationState } from "../../redux/types";
+import {
+  Product,
+  CurrencyTypes,
+  ApplicationState,
+  LayoutTypes,
+} from "../../redux/types";
 
 import Image from "../common/Image";
 
 const Card: React.FC<Product> = ({ title, image, price, category, id }) => {
   const currency = useSelector((state: ApplicationState) => state.currency);
+  const layoutStyle = useSelector(
+    (state: ApplicationState) => state.layout.style
+  );
 
   const generatePriceString = () => {
     switch (currency.selected) {
@@ -23,14 +31,22 @@ const Card: React.FC<Product> = ({ title, image, price, category, id }) => {
 
   return (
     <Link href={{ pathname: "/product", query: { id } }}>
-      <Container>
-        {category.split(" ").map((category, index) => {
-          if (index === 0) return <Category key={index}>{category}</Category>;
-          return <SecondCategory key={index}>{category}</SecondCategory>;
-        })}
-        <Image src={image} alt={title} height={180} />
-        <Title>{title.length > 60 ? title.slice(0, 60) + "..." : title}</Title>
-        <Price>{generatePriceString()}</Price>
+      <Container layoutStyle={layoutStyle}>
+        <Categories layoutStyle={layoutStyle}>
+          {category.split(" ").map((category, index) => {
+            if (index === 0) return <Category key={index}>{category}</Category>;
+            return <SecondCategory key={index}>{category}</SecondCategory>;
+          })}
+        </Categories>
+        <ImageArea layoutStyle={layoutStyle}>
+          <StyledImage src={image} alt={title} height={180} />
+        </ImageArea>
+        <Title layoutStyle={layoutStyle}>
+          {title.length > 60 && layoutStyle != LayoutTypes.LIST
+            ? title.slice(0, 60) + "..."
+            : title}
+        </Title>
+        <Price layoutStyle={layoutStyle}>{generatePriceString()}</Price>
       </Container>
     </Link>
   );
@@ -38,7 +54,11 @@ const Card: React.FC<Product> = ({ title, image, price, category, id }) => {
 
 export default Card;
 
-const Container = styled.li`
+type LayoutProps = {
+  layoutStyle: LayoutTypes;
+};
+
+const Container = styled.li<LayoutProps>`
   position: relative;
   width: 100%;
   height: 300px;
@@ -49,15 +69,54 @@ const Container = styled.li`
   box-sizing: border-box;
   background-color: white;
   cursor: pointer;
-
-  &:hover {
-  }
+  display: flex;
+  flex-direction: column;
 
   @media only screen and (min-width: 768px) {
     width: 240px;
     height: 320px;
     margin: 15px;
+
+    transition: all ease 1s;
+
+    ${({ layoutStyle }: any) =>
+      layoutStyle === LayoutTypes.LIST
+        ? `
+      width: 100%;
+      height: 220px;
+      display: flex;
+      padding: 20px;
+      flex-direction: row;
+    `
+        : `width: 240px;`}
   }
+`;
+
+const StyledImage = styled(Image)`
+  width: 220px;
+`;
+
+const ImageArea = styled.div<LayoutProps>`
+  ${({ layoutStyle }: any) =>
+    layoutStyle === LayoutTypes.LIST
+      ? `
+      border-right: solid 1px #eee;
+      padding-right: 20px;
+    `
+      : `border: none;`}
+`;
+
+const Categories = styled.div<LayoutProps>`
+  ${({ layoutStyle }: any) =>
+    layoutStyle === LayoutTypes.LIST &&
+    `
+      order: 2;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      margin: 0;
+      padding: 0;
+    `}
 `;
 
 const Category = styled.p`
@@ -123,16 +182,32 @@ const SecondCategory = styled.p`
   }
 `;
 
-const Title = styled.h5`
+const Title = styled.h5<LayoutProps>`
   margin: 10px 0;
   display: inline-block;
+  width: 100%;
+
+  ${({ layoutStyle }: any) =>
+    layoutStyle === LayoutTypes.LIST &&
+    `
+      font-size: 1.2rem;
+      margin-left: 40px;
+      margin-top: 20px;
+    `}
 `;
 
-const Price = styled.p`
+const Price = styled.p<LayoutProps>`
   display: block;
   position: absolute;
   bottom: 10px;
   right: 10px;
   margin: 0;
   padding: 0;
+
+  ${({ layoutStyle }: any) =>
+    layoutStyle === LayoutTypes.LIST &&
+    `
+      font-size: 1.2rem;
+
+    `}
 `;

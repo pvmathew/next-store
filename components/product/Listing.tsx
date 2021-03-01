@@ -69,7 +69,6 @@ const Container = styled.div`
   padding: 5px 10px;
   box-sizing: border-box;
   background-color: white;
-  cursor: pointer;
 
   @media only screen and (min-width: 768px) {
     flex-direction: row;
@@ -91,10 +90,12 @@ const BackButton = styled.a`
   top: 10px;
   left: 0px;
   z-index: 2;
+  font-weight: 700;
+
 
   @media only screen and (min-width: 768px) {
-    top: 15px;
-    left: 5px;
+    top: 30px;
+    left: 20px;
   }
 `;
 
@@ -229,11 +230,12 @@ const AddToCartButton = styled.button`
   margin-left: auto;
   margin-right: 0;
   font-size: 1em;
+
   &:focus {
     outline: 0;
   }
   &:hover {
-    background-color: #111111;
+    background-color: #1f1f1f;
     border: none;
     color: white;
   }

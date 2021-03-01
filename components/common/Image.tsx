@@ -5,10 +5,11 @@ interface Props {
   src: string;
   alt: string;
   height: number;
+  className?: string;
 }
 
-const NextImage: React.FC<Props> = ({ src, alt, height }) => (
-  <Container height={height}>
+const NextImage: React.FC<Props> = ({ src, alt, height, className }) => (
+  <Container className={className} height={height}>
     <Image src={src} alt={alt} layout="fill" objectFit="contain" />
   </Container>
 );
@@ -24,7 +25,4 @@ const Container = styled.div<ContainerStyled>`
   height: ${(props) => `${props.height}px;`};
   width: 100%;
   margin: 0 auto;
-
-  @media only screen and (min-width: 768px) {
-  }
 `;

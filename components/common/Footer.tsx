@@ -35,6 +35,7 @@ const ReturnText = styled.button`
   border: 0;
   bottom: 0;
   width: 100%;
+
 `;
 
 const FooterText = styled.p`

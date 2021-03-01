@@ -4,10 +4,13 @@ import {
   InventoryActionTypes,
   ListingActionTypes,
   CurrencyActionTypes,
+  LayoutActionTypes,
   InventoryState,
   ListingState,
   CurrencyState,
+  LayoutState,
   CurrencyTypes,
+  LayoutTypes,
 } from "./types";
 
 export const InventoryReducer: Reducer<InventoryState> = (
@@ -100,6 +103,21 @@ export const CurrencyReducer: Reducer<CurrencyState> = (
     default: {
       return state;
     }
+  }
+};
+
+export const LayoutReducer: Reducer<LayoutState> = (
+  state: LayoutState = { style: LayoutTypes.GRID },
+  action
+) => {
+  switch (action.type) {
+    case LayoutActionTypes.SET_GRID:
+      return { ...state, style: LayoutTypes.GRID };
+    case LayoutActionTypes.SET_LIST:
+      return { ...state, style: LayoutTypes.LIST };
+
+    default:
+      return state;
   }
 };
 
