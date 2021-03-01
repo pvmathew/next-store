@@ -41,8 +41,8 @@ const Listing: React.FC = () => {
         </ImageArea>
         <TextArea>
           {category.split(" ").map((category, index) => {
-            if (index === 0) return <Category>{category}</Category>;
-            return <SecondCategory>{category}</SecondCategory>;
+            if (index === 0) return <Category key={index}>{category}</Category>;
+            return <SecondCategory key={index}>{category}</SecondCategory>;
           })}
           <Title>{title}</Title>
           <Description>{description}</Description>

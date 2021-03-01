@@ -25,8 +25,8 @@ const Card: React.FC<Product> = ({ title, image, price, category, id }) => {
     <Link href={{ pathname: "/product", query: { id } }}>
       <Container>
         {category.split(" ").map((category, index) => {
-          if (index === 0) return <Category>{category}</Category>;
-          return <SecondCategory>{category}</SecondCategory>;
+          if (index === 0) return <Category key={index}>{category}</Category>;
+          return <SecondCategory key={index}>{category}</SecondCategory>;
         })}
         <Image src={image} alt={title} height={180} />
         <Title>{title.length > 60 ? title.slice(0, 60) + "..." : title}</Title>
