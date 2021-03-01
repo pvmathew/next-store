@@ -79,7 +79,11 @@ const DownArrow = styled.i`
   margin-left: 2px;
 `;
 
-const DropdownList = styled.div`
+type DropdownProps = {
+  active: boolean;
+};
+
+const DropdownList = styled.div<DropdownProps>`
   transition: max-height 0.5s ease;
   max-height: 0;
   overflow: hidden;
