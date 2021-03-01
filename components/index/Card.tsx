@@ -112,8 +112,8 @@ const Categories = styled.div<LayoutProps>`
     `
       order: 2;
       position: absolute;
-      top: 10px;
-      right: 20px;
+      top: 30px;
+      left: 290px;
       margin: 0;
       padding: 0;
     `}
@@ -190,9 +190,9 @@ const Title = styled.h5<LayoutProps>`
   ${({ layoutStyle }: any) =>
     layoutStyle === LayoutTypes.LIST &&
     `
-      font-size: 1.2rem;
-      margin-left: 40px;
-      margin-top: 20px;
+      font-size: 1.5rem;
+      margin-left: 45px;
+      margin-top: 45px;
     `}
 `;
 
@@ -207,7 +207,7 @@ const Price = styled.p<LayoutProps>`
   ${({ layoutStyle }: any) =>
     layoutStyle === LayoutTypes.LIST &&
     `
-      font-size: 1.2rem;
+      font-size: 1.5rem;
 
     `}
 `;

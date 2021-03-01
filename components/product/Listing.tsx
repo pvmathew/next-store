@@ -106,7 +106,7 @@ const LeftArrow = styled.i`
   padding: 3px;
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 `;
 
 const ImageArea = styled.div`
