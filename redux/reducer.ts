@@ -96,7 +96,7 @@ export const CurrencyReducer: Reducer<CurrencyState> = (
       return { ...state, rates: { ...state.rates, error: action.payload } };
     }
 
-    //client only
+    // client only
     case CurrencyActionTypes.SELECT_CURRENCY: {
       return { ...state, selected: action.payload };
     }
@@ -122,7 +122,7 @@ export const LayoutReducer: Reducer<LayoutState> = (
 };
 
 // drops initial values from action.payload -- required to ensure proper merging during hydration
-const removeInitialValues = (payload) => {
+const removeInitialValues = (payload: any) => {
   if (payload.inventory && payload.inventory.init === false) {
     delete payload.inventory;
   }

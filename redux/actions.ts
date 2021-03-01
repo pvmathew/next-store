@@ -71,8 +71,3 @@ export const fetchExchangeRate: AppThunk = () => {
     }
   };
 };
-
-// export const selectCurrency = (selection: CurrencyOptions) => ({
-//   type: CurrencyActionTypes.SELECT_CURRENCY,
-//   payload: selection,
-// });

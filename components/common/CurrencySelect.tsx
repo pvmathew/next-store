@@ -39,7 +39,6 @@ const CurrencySelect: React.FC = () => {
       <DropdownButton onClick={() => showDropdown((state) => !state)}>
         {selectedCurrency} <DownArrow />
       </DropdownButton>
-      {/* {dropdownVisibility && <DropdownList>{DropdownListItems}</DropdownList>} */}
       <DropdownList active={dropdownVisibility}>
         {DropdownListItems}
       </DropdownList>

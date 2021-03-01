@@ -87,19 +87,13 @@ const NewArrivalsFlairBlock = styled.div`
     background-color: #111111;
     margin-left: 10px;
     margin-right: 60px;
-
     display: flex;
-    /*flex-flow: wrap;
-    justify-content: center;
-    align-items: center;
-    padding: 8px;
-    box-sizing: border-box; */
   }
 `;
 
 type LayoutProps = {
   layoutStyle: LayoutTypes;
-}
+};
 
 const GridViewButton = styled.div<LayoutProps>`
   width: 50px;
@@ -112,7 +106,6 @@ const GridViewButton = styled.div<LayoutProps>`
   box-sizing: border-box;
   height: 100%;
   cursor: pointer;
-
   background-size: 200% 100%;
   background-image: linear-gradient(to right, gray 50%, #ff6700 50%);
   transition: background-position 0.5s;

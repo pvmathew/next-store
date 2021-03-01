@@ -6,8 +6,7 @@ import { ApplicationState, Product, CurrencyTypes } from "../../redux/types";
 import Image from "../common/Image";
 
 const Listing: React.FC = () => {
-  // product is null on first render
-  // store will have listing data after second hydration cycle
+  // store will have listing data after getServerSideProps (2nd hydration)
   const product: Product | null = useSelector(
     (state: ApplicationState) => state.listing.data
   );
@@ -91,7 +90,6 @@ const BackButton = styled.a`
   left: 0px;
   z-index: 2;
   font-weight: 700;
-
 
   @media only screen and (min-width: 768px) {
     top: 30px;
@@ -234,6 +232,7 @@ const AddToCartButton = styled.button`
   &:focus {
     outline: 0;
   }
+
   &:hover {
     background-color: #1f1f1f;
     border: none;

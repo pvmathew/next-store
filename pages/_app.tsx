@@ -1,9 +1,9 @@
 import React from "react";
 import wrapper from "../redux/store";
-import App, { AppInitialProps, AppContext } from "next/app";
+import App, { AppInitialProps } from "next/app";
 import { createGlobalStyle } from "styled-components";
 
-//Progress Bar
+// Progress Bar
 import ProgressBar from "@badrap/bar-of-progress";
 import Router from "next/router";
 
